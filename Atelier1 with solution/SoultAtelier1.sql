@@ -127,7 +127,8 @@ SELECT name,price
   LIMIT 1;
 -- 20/ Sélectionnez le nom de chaque fabricant ainsi que le nom et le prix de son produit le plus cher.
 
-
+SELECT MAX(Price) AS max_prix , manufacturers.Name AS manifacture_name , products.Name AS product_name
+ FROM products INNER JOIN manufacturers ON products.Manufacturer = manufacturers.Code GROUP BY manufacturers.Name
 
 -- 21/ Ajouter un nouveau produit : Loudspeakers, 70 $, manufacter 2 
 INSERT INTO products ('Code' , 'Name' , 'Price' , 'Manufacturer') VALUES (11, Loudspeakers , 70 , 2)

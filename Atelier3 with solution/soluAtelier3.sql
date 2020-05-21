@@ -78,10 +78,8 @@ where warehouses.location = 'Chicago';
 
 INSERT INTO boxes (Code, Contents, Value, Warehouse) VALUES ('H5RT','Papers', 200,2)
 
-
-
-
-13  UPDATE Boxes SET Value = Value * 0.85; 
+--3.13 Réduire la valeur de toutes les boîtes de 15 %.
+   UPDATE Boxes SET Value = Value * 0.85; 
 
 --3.14 Retirer toutes les boîtes d'une valeur inférieure à 100 $.
 
