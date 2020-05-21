@@ -66,6 +66,7 @@ select name from products where price <= 200;
 
 
 -- 8/ Sélectionnez tous les produits dont le prix est compris entre 60 et 120 dollars.
+select * from products where price between 60 and 120;
 
 
 -- 9/ Sélectionnez le nom et le prix en cents (c'est-à-dire que le prix doit être multiplié par 100).
@@ -73,24 +74,79 @@ select name from products where price <= 200;
 select name, price*100 from products;
 
 -- 10/ Calculer le prix moyen de tous les produits.
+
+SELECT AVG (Pric) FROM products ;
+
 -- 11/ Calculer le prix moyen de tous les produits dont le code fabricant est égal à 2.
 select avg(price) from products where  Manufacturer = 2;
 
 -- 12/ Calculer le nombre de produits dont le prix est supérieur ou égal à 180 dollars.
+select count(*) from products where price>=180;
+
 
 
 -- 13/ Sélectionner le nom et le prix de touproduitss les produits dont le prix est supérieur ou égal à 180 dollars, et trier d'abord par prix (par ordre décroissant), puis par nom (par ordre croissant).
+select name, price from products where price>=180 order by price desc, name asc;
+
 -- 14/ Sélectionnez toutes les données des , y compris toutes les données relatives au fabricant de chaque produit.
+SELECT *FROM products INNER JOIN Manufacturers ON products.Manufacturer =Manufacturers.Code
+
+
 -- 15/ Sélectionnez le nom du produit, le prix et le nom du fabricant de tous les produits.
+
+SELECT Products.Name, Price, Manufacturers.Name
+   FROM Products INNER JOIN Manufacturers
+   ON Products.Manufacturer = Manufacturers.Code;
+
+
 -- 16/ Sélectionnez le prix moyen des produits de chaque fabricant, en indiquant uniquement le code du fabricant.
+
+SELECT AVG(Price), Manufacturer
+    FROM Products
+GROUP BY Manufacturer;
 -- 17/ Sélectionnez le prix moyen des produits de chaque fabricant, en indiquant le nom du fabricant.
+
+select avg(a.price), b.name 
+from Products a join Manufacturers b 
+on a.manufacturer = b.code
+group by b.name;
+
 -- 18/ Sélectionnez les noms des fabricants dont les produits ont un prix moyen supérieur ou égal à 150 $.
+
+SELECT AVG(Price), Manufacturers.Name
+   FROM Products, Manufacturers
+   WHERE Products.Manufacturer = Manufacturers.Code
+   GROUP BY Manufacturers.Name
+   HAVING AVG(Price) >= 150;
+
 -- 19/ Sélectionnez le nom et le prix du produit le moins cher.
+
+SELECT name,price
+  FROM Products
+  ORDER BY price ASC
+  LIMIT 1;
 -- 20/ Sélectionnez le nom de chaque fabricant ainsi que le nom et le prix de son produit le plus cher.
+
+
+
 -- 21/ Ajouter un nouveau produit : Loudspeakers, 70 $, manufacter 2 
+INSERT INTO products ('Code' , 'Name' , 'Price' , 'Manufacturer') VALUES (11, Loudspeakers , 70 , 2)
+
+
 -- 22/ Mettre à jour le nom du produit 8 en "laser Print".
+
+update products
+set name = 'Laser Printer'
+where code=8;
 -- 23/ Appliquer une remise de 10 % à tous les produits.
+update products
+set price=price*0.9;
+
 -- 24/ Appliquer une remise de 10 % à tous les produits dont le prix est supérieur ou égal à 120 $.
+update products
+set price = price * 0.9
+where price >= 120; 
+
 
 
 -- NB: manufacturer c'est le fabricant

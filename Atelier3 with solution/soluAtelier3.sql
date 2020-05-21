@@ -64,7 +64,46 @@ where warehouses.location = 'Chicago';
 
 --3.11 Créer un nouvel entrepôt à New York avec une capacité de 3 boîtes.
 
-SERT 
+ INSERT
    INTO Warehouses
         (Location,Capacity)
  VALUES ('New York',3);
+
+
+
+
+
+
+--3.12 Créer une nouvelle boîte, avec le code "H5RT", contenant des "Papers" d'une valeur de 200 $, et située dans l'entrepôt 2.
+
+INSERT INTO boxes (Code, Contents, Value, Warehouse) VALUES ('H5RT','Papers', 200,2)
+
+
+
+
+13  UPDATE Boxes SET Value = Value * 0.85; 
+
+--3.14 Retirer toutes les boîtes d'une valeur inférieure à 100 $.
+
+DELETE FROM boxes WHERE Value<100
+
+
+-- 3.15 Retirer toutes les boîtes des entrepôts saturés.
+
+DELETE FROM `boxes` WHERE Warehouse IN ( SELECT Code FROM warehouses WHERE Capacity < ( SELECT COUNT(*) FROM boxes WHERE Warehouse = warehouses.Code ) )
+
+
+-- 3.16 Ajouter un indice pour la colonne "Entrepôt" dans le tableau "boîtes".
+
+CREATE INDEX INDEX_WAREHOUSE ON Boxes (warehouse);
+
+
+    -- !!!NOTE!! : l'index ne doit PAS être utilisé sur des petites tables dans la pratique
+-- 3.17 Imprimer tous les index existants
+
+SHOW INDEX FROM Boxes FROM namedatabes;
+
+
+    -- !!!NOTE!! : l'index ne doit PAS être utilisé sur des petites tables dans la pratique
+
+NB : Entrepôt c'est warehouse // les cases : boxes

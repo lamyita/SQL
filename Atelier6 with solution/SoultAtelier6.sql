@@ -5,6 +5,15 @@ Exprimer les requêtes suivantes en SQL :
     -- et les heures travaillées par ce scientifique sur chaque projet, 
     -- dans l'ordre alphabétique du nom du projet, puis du nom du scientifique.
 
-
+SELECT scientists.Name, projects.Name,  projects.Hours  FROM  scientists INNER JOIN AssignedTo ON scientists.SSN = assignedto.Scientist
+         INNER JOIN Projects  ON assignedto.Project = projects.Code
+  ORDER BY projects.Name ASC, scientists.Name ASC;
 
 -- 6.2 Sélectionnez les noms de projets qui ne sont pas encore attribués
+SELECT Name 
+FROM Projects
+WHERE Code NOT In
+(
+SELECT Project 
+         FROM AssignedTo
+);
